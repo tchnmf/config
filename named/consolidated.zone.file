@@ -1,0 +1,10 @@
+$TTL 86400
+@       IN      SOA     ns.maina.local.      hostmaster.maina.local. (
+                     2017121001       ; serial number YYMMDDNN
+                     28800   ; refresh  8 hours
+                     7200    ; retry    2 hours
+                     864000  ; expire  10 days
+                     86400 ) ; min ttl  1 day
+              NS      ce-a.maina.local.
+              A       10.0.0.20 
+*             IN      A     10.0.0.20 
