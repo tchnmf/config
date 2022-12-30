@@ -12,15 +12,15 @@ function configure_git() {
 }
 
 function configure_fish() {
-	# tmux config
+	# FISH config
 	fish_variables_url="https://raw.githubusercontent.com/tchnmf/config/master/fish/fish_variables"
 	fish_functions_url="https://raw.githubusercontent.com/tchnmf/config/master/fish/functions" 
-	fish_functions=(
+	fish_function_list=(
 		fish_prompt.fish
 		)
 
 	curl -s $fish_variables_url --output  "$HOME/.config/fish/fish_variables"
-	for x in ${fish_functions[*]};do
+	for x in ${fish_function_list[*]};do
 		echo $x
 		curl -s "$fish_functions_url/$x" --output "$HOME/.config/fish/functions/$x" 
 	done
@@ -28,15 +28,14 @@ function configure_fish() {
 
 function configure_tmux() {
 	# tmux config
-	echo ""
+	echo "tmux config"
 }
 
 function configure_ranger() {
-	# tmux config
-	echo ""
+	# ranger config
+	echo "ranger config"
 	rc_url="https://raw.githubusercontent.com/tchnmf/config/master/ranger/rc.conf"
 	curl "$rc_url" --output $HOME/.config/ranger/rc.conf
-
 }
 
 function configure_vim() {
@@ -54,6 +53,13 @@ function configure_vim() {
 
 
 case "$1" in
+	all)
+	    configure_git
+	    configure_fish
+	    configure_ranger
+	    configure_tmux
+	    configure_vim
+	    ;;
 	git)
 	    echo '... GIT yo'
 	    configure_git
@@ -67,6 +73,6 @@ case "$1" in
 	    configure_vim
 	    ;;
 	*)
-            echo $"Usage: $0 {fish|vim|tmux|ranger}"
+            echo $"Usage: $0 {all|git|fish|ranger|tmux|vim}"
             exit 1
 esac
