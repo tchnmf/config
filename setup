@@ -1,0 +1,58 @@
+#!/bin/bash
+
+
+function configure_fish() {
+	# tmux config
+	fish_variables_url="https://raw.githubusercontent.com/tchnmf/config/master/fish/fish_variables"
+	fish_functions_url="https://raw.githubusercontent.com/tchnmf/config/master/fish/functions" 
+	fish_functions=(
+		fish_prompt.fish
+		)
+
+	curl -s $fish_variables_url --output  "$HOME/.config/fish/fish_variables"
+	for x in ${fish_functions[*]};do
+		echo $x
+		curl -s "$fish_functions_url/$x" --output "$HOME/.config/fish/functions/$x" 
+	done
+}
+
+function configure_tmux() {
+	# tmux config
+	echo ""
+}
+
+function configure_ranger() {
+	# tmux config
+	echo ""
+	rc_url="https://raw.githubusercontent.com/tchnmf/config/master/ranger/rc.conf"
+	curl "$rc_url" --output $HOME/.config/ranger/rc.conf
+
+}
+
+function configure_vim() {
+	# vim config
+	echo ""
+	vimrc_url="https://raw.githubusercontent.com/tchnmf/config/master/vim/vimrc"
+	curl -s "$vimrc_url" --output $HOME/.vimrc
+	echo ""
+	echo "$HOME/.vimrc"
+	cat -n $HOME/.vimrc
+	echo ""
+}
+
+
+
+
+case "$1" in
+	fish)
+	    echo '... FISH yo'
+	    configure_fish
+	    ;;
+	vim)
+	    echo '... VIM yo'
+	    configure_vim
+	    ;;
+	*)
+            echo $"Usage: $0 {fish|vim|tmux|ranger}"
+            exit 1
+esac
