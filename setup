@@ -1,5 +1,15 @@
 #!/bin/bash
 
+function configure_git() {
+	# git config
+	echo 'Enter user.name: '
+	read user_name
+	echo 'Enger user.email: '
+	read user_email
+	git config --global user.name "${user_name}"
+	git config --global user.email "${user_email}"
+	cat $HOME/.gitconfig
+}
 
 function configure_fish() {
 	# tmux config
@@ -44,6 +54,10 @@ function configure_vim() {
 
 
 case "$1" in
+	git)
+	    echo '... GIT yo'
+	    configure_git
+	    ;;
 	fish)
 	    echo '... FISH yo'
 	    configure_fish
