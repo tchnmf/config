@@ -29,6 +29,9 @@ function configure_fish() {
 function configure_tmux() {
 	# tmux config
 	echo "tmux config"
+	tmuxconf_url="https://raw.githubusercontent.com/tchnmf/config/master/tmux/tmux.conf"
+	curl "$tmuxconf_url" --output $HOME/.tmux.conf
+	cat $HOME/.tmux.conf
 }
 
 function configure_ranger() {
@@ -67,6 +70,10 @@ case "$1" in
 	fish)
 	    echo '... FISH yo'
 	    configure_fish
+	    ;;
+	tmux)
+	    echo '... VIM yo'
+	    configure_tmux
 	    ;;
 	vim)
 	    echo '... VIM yo'
