@@ -1,9 +1,10 @@
+#!/usr/bin/env python
+#
+#
 # +----------------------------+
 # | $> python3 -m venv pyenv   |
 # | $> pip install requests    |
 # +----------------------------+
-#
-#!/usr/bin/env python
 
 # TODO:
 # * Check if program the executable exists before attemptig to configure, ie which fish, which tmux
