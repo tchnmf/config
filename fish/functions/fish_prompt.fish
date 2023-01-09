@@ -33,7 +33,7 @@ function fish_prompt --description 'Write out the prompt'
     # Comment out, do not echo the exit code in the prompt
     #set -l prompt_status (__fish_print_pipestatus " [" "]" "|" (set_color $fish_color_status) (set_color --bold $fish_color_status) $last_pipestatus)
 
-    echo -n -s (set_color $fish_color_user) "$USER" $normal @ '[' (set_color $color_host) (prompt_hostname) $normal ']' ' ' (set_color $color_cwd) (prompt_pwd) $normal (fish_vcs_prompt) $normal $prompt_status $suffix " "
+    echo -n -s (set_color $fish_color_user) "$USER" $normal ' ' @ ' [' (set_color $color_host) (prompt_hostname) $normal ']' ' ' (set_color $color_cwd) (prompt_pwd) $normal (fish_vcs_prompt) $normal $prompt_status $suffix " "
 
     # We don't want the hostname in the prompt
     #echo -n -s (set_color $fish_color_user) "$USER" ' '  (set_color $color_cwd) (prompt_pwd) $normal (fish_vcs_prompt) $normal $prompt_status $suffix " "
