@@ -16,6 +16,7 @@ if status is-interactive
     alias a='ansible'
     alias ap='ansible-playbook'
     alias lsd='ls -lart'
+    alias td='date +%F'
 
     function pyenv
 	source ~/pyenv/bin/activate.fish
