@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+
 # TODO:
 # * Check if program the executable exists before attemptig to configure, ie which fish, which tmux
 
@@ -9,13 +10,24 @@ import requests
 home      = os.environ['HOME']+'/'
 
 # def usage():
-#     print()
+#     print(
+#         'Usage:\t', 'aap_api.py organization-id templates/workflows/projects',
+#         '\n','Examples:\n',
+#         '- aap_api.py 19 templates\n',
+#     )
+
 
 def url_to_file(source_url,destination_file ):
     response=requests.get(source_url)
     with open(destination_file, 'w') as file:
         file.write(response.text)
         file.close()
+
+def setup_git():
+    user_name = input('User name: ')
+    user_email = input('User email: ')
+    os.system("git config --global user.name  '%s' " % user_name)
+    os.system("git config --global user.email  '%s' " % user_email)
 
 def setup_fish():
     print('Configuring fish...')
@@ -29,6 +41,7 @@ def setup_fish():
     # randomize color if fish prompt ?
 
     url_to_file(fish_variables_url, fish_variables_path)
+
     for fish_function in fish_functions_list:
         function_url = fish_functions_url + fish_function
         function_name = fish_function+'v2'
@@ -58,9 +71,13 @@ def setup_ranger():
     url_to_file(rc_url, rc_path)
     print('Done.')
 
+
 def select():
-    selected = input('select: (fish|tmux|vim|ranger):')
+    selected = input('select: (git|fish|tmux|vim|ranger):')
+
     match selected:
+        case "git":
+            setup_git()
         case "fish":
             setup_fish()
         case "tmux":
@@ -79,6 +96,7 @@ def select():
 
 def main():
     select()
+
 
 if __name__ == "__main__":
     main()
