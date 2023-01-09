@@ -10,7 +10,8 @@ SETUVAR fish_color_end:009900
 SETUVAR fish_color_error:F22
 SETUVAR fish_color_escape:0AA
 SETUVAR fish_color_history_current:0AA
-SETUVAR fish_color_host:normal
+#SETUVAR fish_color_host:normal
+SETUVAR fish_color_host:cyan
 SETUVAR fish_color_host_remote:\x1d
 SETUVAR fish_color_keyword:\x1d
 SETUVAR fish_color_match:0AA
