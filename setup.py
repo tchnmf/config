@@ -10,7 +10,10 @@
 # * Check if program the executable exists before attemptig to configure, ie which fish, which tmux
 
 import os
+import sys
 import requests
+import shutil
+import difflib
 
 home      = os.environ['HOME']+'/'
 
@@ -19,10 +22,13 @@ home      = os.environ['HOME']+'/'
 
 
 def url_to_file(source_url,destination_file ):
-    response=requests.get(source_url)
-    with open(destination_file, 'w') as file:
-        file.write(response.text)
-        file.close()
+    response = requests.get(source_url)
+    file = open(destination_file, "w+")
+    file.write(response.text)
+    file.close() 
+
+def which(command):
+    print(shutil.which(command))
 
 def setup_git():
     user_name = input('User name: ')
@@ -32,8 +38,10 @@ def setup_git():
 
 def setup_fish():
     print('Configuring fish...')
+    fish_config_path = home+'/.config/fish/config.fish'
     fish_variables_path = home+'/.config/fish/fish_variables'
     fish_functions_path = home+'/.config/fish/functions/'
+    fish_config_url = 'https://raw.githubusercontent.com/tchnmf/config/master/fish/config.fish'
     fish_variables_url = 'https://raw.githubusercontent.com/tchnmf/config/master/fish/fish_variables'
     fish_functions_url = 'https://raw.githubusercontent.com/tchnmf/config/master/fish/functions/'
     fish_functions_list = [
@@ -42,6 +50,7 @@ def setup_fish():
     # randomize color if fish prompt ?
 
     url_to_file(fish_variables_url, fish_variables_path)
+    url_to_file(fish_config_url, fish_config_path)
 
     for fish_function in fish_functions_list:
         function_url = fish_functions_url + fish_function
@@ -84,8 +93,10 @@ def select():
         case "tmux":
             setup_tmux()
         case "vim":
+            which("vim")
             setup_vim()
         case "ranger":
+            which("ranger")
             setup_ranger()
         case _:
             setup_fish()
@@ -97,7 +108,6 @@ def select():
 
 def main():
     select()
-
 
 if __name__ == "__main__":
     main()
