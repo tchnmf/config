@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-
 # TODO:
 # * Check if program the executable exists before attemptig to configure, ie which fish, which tmux
 
@@ -30,7 +29,6 @@ def setup_fish():
     # randomize color if fish prompt ?
 
     url_to_file(fish_variables_url, fish_variables_path)
-
     for fish_function in fish_functions_list:
         function_url = fish_functions_url + fish_function
         function_name = fish_function+'v2'
@@ -60,15 +58,27 @@ def setup_ranger():
     url_to_file(rc_url, rc_path)
     print('Done.')
 
+def select():
+    selected = input('select: (fish|tmux|vim|ranger):')
+    match selected:
+        case "fish":
+            setup_fish()
+        case "tmux":
+            setup_tmux()
+        case "vim":
+            setup_vim()
+        case "ranger":
+            setup_ranger()
+        case _:
+            setup_fish()
+            setup_tmux()
+            setup_vim()
+            setup_ranger()
+            print("Bye.")
+
 
 def main():
-    setup_fish()
-    setup_tmux()
-    setup_vim()
-    setup_ranger()
-
+    select()
 
 if __name__ == "__main__":
     main()
-
-
