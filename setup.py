@@ -10,11 +10,7 @@ import requests
 home      = os.environ['HOME']+'/'
 
 # def usage():
-#     print(
-#         'Usage:\t', 'aap_api.py organization-id templates/workflows/projects',
-#         '\n','Examples:\n',
-#         '- aap_api.py 19 templates\n',
-#     )
+#     print()
 
 def url_to_file(source_url,destination_file ):
     response=requests.get(source_url)
