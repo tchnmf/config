@@ -1,12 +1,29 @@
+# Created with podman-4.6.2
+
+# NOTE: If you generated this yaml from an unprivileged and rootless podman container on an SELinux
+# enabled system, check the podman generate kube man page for steps to follow to ensure that your pod/container
+# has the right permissions to access the volumes added.
+---
 apiVersion: v1
 kind: Pod
 metadata:
+  creationTimestamp: "2023-09-28T21:57:41Z"
   labels:
-    app: node_exporter
-  name: node_exporter
+    app: node-exporter-pod
+  name: node-exporter-pod
 spec:
   containers:
   - image: quay.io/prometheus/node-exporter:latest
-    name: node_exporter
+    name: node-exporter
     securityContext: {}
+    volumeMounts:
+    - mountPath: /host
+      name: root-host-0
+      readOnly: true
   hostNetwork: true
+  hostname: fcosp-2.dc
+  volumes:
+  - hostPath:
+      path: /
+      type: Directory
+    name: root-host-0
