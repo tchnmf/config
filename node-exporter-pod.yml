@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: node_exporter
+  name: node_exporter
+spec:
+  containers:
+  - image: quay.io/prometheus/node-exporter:latest
+    name: node_exporter
+    securityContext: {}
+  hostNetwork: true
